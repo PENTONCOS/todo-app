@@ -1,29 +1,37 @@
+import { Empty, List } from 'antd';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import type { TodoListProps } from '../types';
 import { TodoItem } from './TodoItem';
 
 export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   if (todos.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
-        <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-        <h3 className="mt-2 text-sm font-medium text-gray-900">暂无待办事项</h3>
-        <p className="mt-1 text-sm text-gray-500">开始添加您的第一个任务吧！</p>
-      </div>
+      <Empty
+        image={<CheckCircleOutlined style={{ fontSize: 64, color: '#d9d9d9' }} />}
+        description={
+          <span className="text-gray-500">
+            <div className="text-lg font-medium text-gray-900 mb-1">暂无待办事项</div>
+            <div className="text-sm">开始添加您的第一个任务吧！</div>
+          </span>
+        }
+        className="py-12"
+      />
     );
   }
 
   return (
-    <div className="space-y-3">
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggle={onToggle}
-          onDelete={onDelete}
-        />
-      ))}
-    </div>
+    <List
+      dataSource={todos}
+      renderItem={(todo) => (
+        <List.Item className="!px-0 !py-0 border-none">
+          <TodoItem
+            todo={todo}
+            onToggle={onToggle}
+            onDelete={onDelete}
+          />
+        </List.Item>
+      )}
+      className="space-y-0"
+    />
   );
 } 
