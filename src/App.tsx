@@ -13,7 +13,7 @@ function App() {
       <div className="max-w-2xl mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            智能待办事项管理器
+            智能待办事项管理器1111111
           </h1>
           <p className="text-gray-600 text-center mb-6">
             使用AI智能分类，让任务管理更高效
