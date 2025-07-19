@@ -1,4 +1,4 @@
-import { Layout, Typography, Card, Space, Progress, Divider } from 'antd';
+import { Layout, Typography, Card, Progress, Divider } from 'antd';
 import { CheckCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { AddTodo } from './components/AddTodo';
 import { TodoList } from './components/TodoList';
