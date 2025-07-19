@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Input, Button, Form, Space } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Input, Button, Form, Space, message } from 'antd';
+import { PlusOutlined, SendOutlined } from '@ant-design/icons';
 import type { AddTodoProps } from '../types';
 
 export function AddTodo({ onAdd }: AddTodoProps) {
@@ -13,6 +13,7 @@ export function AddTodo({ onAdd }: AddTodoProps) {
       try {
         onAdd(values.text);
         form.resetFields();
+        message.success('任务添加成功！');
       } finally {
         setLoading(false);
       }
@@ -21,35 +22,45 @@ export function AddTodo({ onAdd }: AddTodoProps) {
 
   return (
     <Form form={form} onFinish={handleSubmit} layout="inline" className="w-full">
-      <Space.Compact className="w-full">
+      <div className="w-full">
         <Form.Item
           name="text"
-          className="flex-1 mb-0"
+          className="w-full mb-0"
           rules={[
-            { required: true, message: '请输入待办事项内容' },
+            { required: true, message: '请输入任务内容' },
             { max: 100, message: '内容不能超过100个字符' }
           ]}
         >
           <Input
-            placeholder="添加新的待办事项..."
+            placeholder="输入您的任务，例如：完成项目报告、学习React、健身30分钟..."
             size="large"
             allowClear
-            className="rounded-r-none"
+            className="rounded-2xl border-2 border-gray-200 focus:border-blue-500 focus:shadow-lg transition-all duration-300"
+            style={{
+              height: '56px',
+              fontSize: '16px',
+              paddingLeft: '20px',
+              paddingRight: '20px'
+            }}
           />
         </Form.Item>
-        <Form.Item className="mb-0">
+        <Form.Item className="w-full mb-0 mt-4">
           <Button
             type="primary"
             htmlType="submit"
             size="large"
             loading={loading}
-            icon={<PlusOutlined />}
-            className="rounded-l-none"
+            icon={loading ? <PlusOutlined /> : <SendOutlined />}
+            className="w-full rounded-2xl h-12 text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              border: 'none'
+            }}
           >
-            添加
+            {loading ? '添加中...' : '添加任务'}
           </Button>
         </Form.Item>
-      </Space.Compact>
+      </div>
     </Form>
   );
 } 
