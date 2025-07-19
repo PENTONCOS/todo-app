@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: Build and Test
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +26,8 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          vercel-token: SZkuwhZaxR7DjFmfnoqp3FhP
-          vercel-org-id: pentoncos-projects
-          vercel-project-id: prj_c2444XIS8Cxy1yUM8VoeG0J3Ty7Z
-          vercel-args: '--prod'
+          name: build-files
+          path: dist/
